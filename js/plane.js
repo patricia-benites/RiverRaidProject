@@ -7,10 +7,6 @@ class Plane {
         this.speedY = -1;
     }
 
-    // move() {
-    //     this.y += this.speedY;
-    // }
-
     draw() {
         // ctx.clearRect(this.x, this.y, this.width, this.height);
         // this.move();

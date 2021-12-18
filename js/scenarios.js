@@ -12,16 +12,22 @@ class Scenario1 {
     move() {
         this.y += this.speedY;
     }
-    draw() {
-        setInterval(() => {
-            this.move();
-            ctx.fillStyle = "blue";
-            ctx.fillRect(this.x,this.y,400, canvas.height);
-            this.plane.draw();
-          }, 200);
 
+    create_objects(x,y,w,h) {
+        ctx.fillStyle = "green";
+        ctx.fillRect(x, y,w,h);
+        ctx.stroke();
+    }
+    draw() {
+        // this.move();
+        this.create_objects();
+        ctx.fillStyle = "blue";
+        ctx.fillRect(this.x,this.y,400, canvas.height);
+        this.plane.draw();
+    }
 }
-}
+
+
 if (typeof module !== 'undefined') {
     module.exports = Scenario1;
   }

@@ -12,15 +12,11 @@ class Shoot {
     }
 
     draw() {
-        setInterval(() => {
-            // ctx.clearRect(0, 0, canvas.width, canvas.height);
-            this.shoot();
-            ctx.fillStyle = "black";
-            ctx.fillRect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-          }, 200);
-
         
+        this.shoot();
+        ctx.fillStyle = "black";
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.stroke();
     }
 
    
