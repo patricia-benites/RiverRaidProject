@@ -1,3 +1,8 @@
+const bgImg = new Image();
+bgImg.src = "../images/bar test.png";
+
+const indicatorsImg = new Image();
+indicatorsImg.src = "../images/bar_indicators.png";
 
 class Scenario1 {
     constructor(canvas, plane) {
@@ -11,6 +16,7 @@ class Scenario1 {
 
     move() {
         this.y += this.speedY;
+        this.y %= this.height;
     }
 
     create_objects(x,y,w,h) {
@@ -19,11 +25,13 @@ class Scenario1 {
         ctx.stroke();
     }
     draw() {
-        // this.move();
-        this.create_objects();
-        ctx.fillStyle = "blue";
+        this.move();
+        ctx.fillStyle = "rgb(0,0,255)";
         ctx.fillRect(this.x,this.y,400, canvas.height);
+        ctx.fillRect(this.x,this.y - canvas.height, 400, canvas.height)
         this.plane.draw();
+        ctx.drawImage(bgImg, 0, 940, canvas.width, 60);
+        ctx.drawImage(indicatorsImg, 300, 950, 200, 30);
     }
 }
 

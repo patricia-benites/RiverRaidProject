@@ -1,19 +1,15 @@
 class Plane {
     constructor(){
         this.x = 400;
-        this.y = 780;
-        this.width = 20;
-        this.height = 20;
-        this.speedY = -1;
+        this.y = 850;
+        this.width = 50;
+        this.height = 50;
     }
 
     draw() {
-        // ctx.clearRect(this.x, this.y, this.width, this.height);
-        // this.move();
-        ctx.fillStyle = "black";
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-        ctx.stroke();
-        // ctx.clearRect(this.x, this.y, this.width, this.height);
+        const plane = new Image();
+        plane.src = "../images/plane.jpeg"
+        ctx.drawImage(plane, this.x, this.y, this.width, this.height)
     }
 
     moveLeft() {

@@ -14,7 +14,7 @@ class Shoot {
     draw() {
         
         this.shoot();
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "yellow";
         ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.stroke();
     }
