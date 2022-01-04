@@ -13,11 +13,11 @@ class Plane {
     }
 
     moveLeft() {
-        this.x-=5;
+        this.x-=10;
     }
 
     moveRight() {
-        this.x+=5;
+        this.x+=10;
     }
 
     left() {

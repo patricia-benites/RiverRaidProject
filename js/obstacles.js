@@ -5,7 +5,9 @@ class Obstacle {
       this.width = argWidth;
       this.height = argHeight;
       this.image = image
-      this.speedY = 1;
+      this.speedY = 3;
+      this.shot = false;
+      this.visible = true;
     }
   
     move() {
@@ -13,9 +15,13 @@ class Obstacle {
     }
   
     draw() {
-      this.move();
-      if (this.image) {
+      
+      if (this.image && this.visible) {
+        this.move();
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+      } else if (this.visible){
+        ctx.fillStyle = "rgba(255, 255, 255, 0)";
+        ctx.fillRect(this.x,this.y,this.width, this.height);
       }
     }
 
