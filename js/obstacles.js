@@ -10,7 +10,6 @@ class Obstacle {
   
     move() {
         this.y += this.speedY;
-        this.y %= canvas.height;
     }
   
     draw() {

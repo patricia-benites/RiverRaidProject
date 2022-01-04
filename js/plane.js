@@ -8,7 +8,7 @@ class Plane {
 
     draw() {
         const plane = new Image();
-        plane.src = "../images/plane.jpeg"
+        plane.src = "../images/plane-still.png"
         ctx.drawImage(plane, this.x, this.y, this.width, this.height)
     }
 
