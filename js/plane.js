@@ -19,6 +19,31 @@ class Plane {
     moveRight() {
         this.x+=5;
     }
+
+    left() {
+    return this.x;
+    }
+
+    right() {
+    return this.x + this.width;
+    }
+
+    top() {
+    return this.y;
+    }
+
+    bottom() {
+    return this.y + this.height;
+    }
+
+    collision(obstacle) {
+    return !(
+        this.bottom() < obstacle.top() ||
+        this.top() > obstacle.bottom() ||
+        this.right() < obstacle.left() ||
+        this.left() > obstacle.right()
+    );
+    }
 }
 
 

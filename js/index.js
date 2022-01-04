@@ -52,6 +52,37 @@ function updateShoots() {
   });
 }
 
+function checkForFatalCollision() {
+  const collision = obstacles.some((obstacle) => {
+    return plane.collision(obstacle);
+  });
+
+  if (collision) {
+    console.log("Fatal Collision");
+  }
+}
+
+function checkForShootCollision() {
+  shoots.forEach((shoot) => {
+    obstacles.forEach((obstacle) =>{
+      const collision = shoot.collision(obstacle);
+      if (collision) {
+        console.log("collision shoot and obstacle");
+      }
+    });
+});
+
+
+
+  const collision = obstacles.some((obstacle) => {
+    return plane.collision(obstacle);
+  });
+
+  if (collision) {
+    console.log("Fatal Collision");
+  }
+}
+
 window.onload = function () {
     document.getElementById("start-game-button").onclick = function () {
       document.getElementById("start-game-button").disabled = true;
@@ -63,11 +94,15 @@ window.onload = function () {
   };
 
 function startGame() {
-    setInterval(() => {
+    const startGame = setInterval(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       scenario1.draw();
       updateObstacles();
       updateShoots();
+      checkForFatalCollision();
+      checkForShootCollision();
+     
+
     }, 20);
   }
   

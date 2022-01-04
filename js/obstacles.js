@@ -1,5 +1,5 @@
 class Obstacle {
-    constructor(argX, argY, argWidth, argHeight, image) {
+    constructor(argX, argY, argWidth, argHeight, image = null) {
       this.x = argX;
       this.y = argY;
       this.width = argWidth;
@@ -14,8 +14,25 @@ class Obstacle {
   
     draw() {
       this.move();
-      ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
-      
+      if (this.image) {
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+      }
+    }
+
+    left() {
+      return this.x;
+    }
+  
+    right() {
+      return this.x + this.width;
+    }
+  
+    top() {
+      return this.y;
+    }
+  
+    bottom() {
+      return this.y + this.height;
     }
 }  
 
