@@ -36,8 +36,8 @@ class Scenario1 {
     if (this.y < 840) {
       ctx.drawImage(house, 50, this.y, 100, 100);
     }
-    if (this.y + 500 < 840) {
-      ctx.drawImage(house, 700, this.y + 500, 100, 100);
+    if (this.y < 1000) {
+      ctx.drawImage(house, 700, this.y - 100, 100, 100);
     }
   }
 }
