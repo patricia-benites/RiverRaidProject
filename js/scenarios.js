@@ -10,6 +10,7 @@ house.src = "../images/house.png";
 const land = new Image();
 land.src = "../images/original_game.png";
 
+
 class Scenario1 {
   constructor(canvas) {
     this.x = 200;
