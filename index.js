@@ -77,17 +77,32 @@ function checkForShootCollision() {
         scorePoints += 10;
         obstacle.shot = true;
         obstacle.visible = false;
-        console.log(scorePoints);
       }
     });
   });
 }
 
+function roundedRect(ctx, x, y, width, height, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x, y + radius);
+  ctx.lineTo(x, y + height - radius);
+  ctx.arcTo(x, y + height, x + radius, y + height, radius);
+  ctx.lineTo(x + width - radius, y + height);
+  ctx.arcTo(x + width, y + height, x + width, y + height-radius, radius);
+  ctx.lineTo(x + width, y + radius);
+  ctx.arcTo(x + width, y, x + width - radius, y, radius);
+  ctx.lineTo(x + radius, y);
+  ctx.arcTo(x, y, x, y + radius, radius);
+  ctx.stroke();
+}
+
+
 function showScore() {
   ctx.fillStyle = "black";
   ctx.font = "bold 30px Arial";
-  ctx.fillText("Score", 610, 100);
-  ctx.fillText(scorePoints, 630, 140);
+  ctx.fillText("Scores", 610, 100);
+  ctx.fillText(scorePoints, 640, 140);
+  roundedRect(ctx, 605, 60, 120, 90, 20);
 }
 
 window.onload = function () {
