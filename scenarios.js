@@ -10,7 +10,6 @@ house.src = "./images/house.png";
 const land = new Image();
 land.src = "./images/original_game.png";
 
-
 class Scenario1 {
   constructor(canvas) {
     this.x = 200;
@@ -34,8 +33,12 @@ class Scenario1 {
     ctx.drawImage(land, 600, 0, 400, this.height);
     ctx.drawImage(bgImg, 0, 940, canvas.width, 60);
     ctx.drawImage(indicatorsImg, 300, 950, 200, 30);
-    ctx.drawImage(house, 50, this.y, 100, 100);
-    ctx.drawImage(house, 700, this.y - 100, 100, 100);
+    if (this.y < 840) {
+      ctx.drawImage(house, 50, this.y, 100, 100);
+    }
+    if (this.y + 500 < 840) {
+      ctx.drawImage(house, 700, this.y + 500, 100, 100);
+    }
   }
 }
 
