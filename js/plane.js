@@ -1,53 +1,51 @@
 class Plane {
-    constructor(){
-        this.x = 400;
-        this.y = 850;
-        this.width = 50;
-        this.height = 50;
-    }
+  constructor() {
+    this.x = 400;
+    this.y = 850;
+    this.width = 50;
+    this.height = 50;
+  }
 
-    draw() {
-        const plane = new Image();
-        plane.src = "../images/plane-still.png"
-        ctx.drawImage(plane, this.x, this.y, this.width, this.height)
-    }
+  draw() {
+    const plane = new Image();
+    plane.src = "../images/plane-still.png";
+    ctx.drawImage(plane, this.x, this.y, this.width, this.height);
+  }
 
-    moveLeft() {
-        this.x-=10;
-    }
+  moveLeft() {
+    this.x -= 10;
+  }
 
-    moveRight() {
-        this.x+=10;
-    }
+  moveRight() {
+    this.x += 10;
+  }
 
-    left() {
+  left() {
     return this.x;
-    }
+  }
 
-    right() {
+  right() {
     return this.x + this.width;
-    }
+  }
 
-    top() {
+  top() {
     return this.y;
-    }
+  }
 
-    bottom() {
+  bottom() {
     return this.y + this.height;
-    }
+  }
 
-    collision(obstacle) {
+  collision(obstacle) {
     return !(
-        this.bottom() < obstacle.top() ||
-        this.top() > obstacle.bottom() ||
-        this.right() < obstacle.left() ||
-        this.left() > obstacle.right()
+      this.bottom() < obstacle.top() ||
+      this.top() > obstacle.bottom() ||
+      this.right() < obstacle.left() ||
+      this.left() > obstacle.right()
     );
-    }
+  }
 }
 
-
-
-if (typeof module !== 'undefined') {
-    module.exports = Plane;
-  }
+if (typeof module !== "undefined") {
+  module.exports = Plane;
+}

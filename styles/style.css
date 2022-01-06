@@ -1,19 +1,19 @@
 body {
-    background-color: #333333;
-    text-align: center;
+  background-color: #333333;
+  text-align: center;
 }
 
 .canvas {
-    background-color: green;
+  background-image: url("../images/background.png");
 }
 
 
 #start-game-button {
-    border: 0;
-    box-shadow: 0;
-    background: linear-gradient(to bottom, green, #BAC600);
-    color: #fff;
-    padding: 20px 40px;
-    font-size: 30px;
-    border-radius: 5px;
-  }
+  border: 0;
+  box-shadow: 0;
+  background: linear-gradient(to bottom, green, #bac600);
+  color: #fff;
+  padding: 20px 40px;
+  font-size: 30px;
+  border-radius: 5px;
+}

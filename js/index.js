@@ -25,11 +25,11 @@ explosionAudio.src = "../sounds/sounds_enemy_destroyed.wav";
 const gameOver = new Image();
 gameOver.src = "../images/game_over.png";
 
+const youWin = new Image();
+youWin.src = "../images/win.png";
+
 let plane;
 let scenario;
-
-ctx.fillStyle = "green";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 let shoots = [];
 
@@ -65,10 +65,6 @@ function checkForFatalCollision() {
     return plane.collision(obstacle);
   });
 
-  if (collision) {
-    console.log("Fatal Collision");
-  }
-
   return collision;
 }
 
@@ -87,9 +83,17 @@ function checkForShootCollision() {
   });
 }
 
+function showScore() {
+  ctx.fillStyle = "black";
+  ctx.font = "bold 30px Arial";
+  ctx.fillText("Score", 610, 100);
+  ctx.fillText(scorePoints, 630, 140);
+}
+
 window.onload = function () {
   document.getElementById("start-game-button").onclick = function () {
     document.getElementById("start-game-button").disabled = true;
+    document.getElementById("start-game-button").style.visibility = "hidden";
     startGame();
   };
 };
@@ -97,6 +101,10 @@ window.onload = function () {
 function startGame() {
   const leftPanel = new Obstacle(0, 0, 199, 940);
   const rightPanel = new Obstacle(601, 0, 199, 940);
+  shoots = [];
+  obstacles = [];
+  frames = 0;
+  scorePoints = 0;
   obstacles.push(leftPanel);
   obstacles.push(rightPanel);
   plane = new Plane();
@@ -108,20 +116,36 @@ function startGame() {
     audio.play();
     updateObstacles();
     updateShoots();
+    showScore();
     if (checkForFatalCollision()) {
       explosionAudio.play();
-      console.log("after the game");
-      shoots = [];
-      obstacles = [];
-      frames = 0;
-      scorePoints = 0;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      scenario.draw();
-      setTimeout(()=> {
+
+      setTimeout(() => {
         ctx.drawImage(gameOver, 0, 0, canvas.width, canvas.height);
-      }, 1000);
-      
-      document.getElementById("start-game-button").disabled = false;
+      }, 2000);
+
+      setTimeout(() => {
+        scenario.draw();
+        document.getElementById("start-game-button").disabled = false;
+        document.getElementById("start-game-button").style.visibility =
+          "visible";
+      }, 5000);
+
+      clearInterval(startInterval);
+    }
+
+    if (scorePoints >= 200) {
+      setTimeout(() => {
+        ctx.drawImage(youWin, 0, 0, canvas.width, canvas.height);
+      }, 2000);
+
+      setTimeout(() => {
+        scenario.draw();
+        document.getElementById("start-game-button").disabled = false;
+        document.getElementById("start-game-button").style.visibility =
+          "visible";
+      }, 5000);
+
       clearInterval(startInterval);
     }
     checkForShootCollision();

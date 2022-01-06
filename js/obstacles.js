@@ -5,7 +5,7 @@ class Obstacle {
       this.width = argWidth;
       this.height = argHeight;
       this.image = image
-      this.speedY = 3;
+      this.speedY = 2;
       this.shot = false;
       this.visible = true;
     }
