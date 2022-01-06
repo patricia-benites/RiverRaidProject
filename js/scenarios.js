@@ -1,5 +1,5 @@
 const bgImg = new Image();
-bgImg.src = "../images/bar_test.PNG";
+bgImg.src = "../images/bar_test.png";
 
 const indicatorsImg = new Image();
 indicatorsImg.src = "../images/bar_indicators.png";
