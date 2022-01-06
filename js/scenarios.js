@@ -1,11 +1,8 @@
 const bgImg = new Image();
-bgImg.src = "../images/bar test.png";
+bgImg.src = "../images/bar_test.PNG";
 
 const indicatorsImg = new Image();
 indicatorsImg.src = "../images/bar_indicators.png";
-indicatorsImg.onload = function() {
-    ctx.drawImage(indicatorsImg, 300, 950, 200, 30);
-}
 
 const house = new Image();
 house.src = "../images/house.png";
