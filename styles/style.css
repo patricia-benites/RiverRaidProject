@@ -5,6 +5,7 @@ body {
 
 .canvas {
   background-image: url("../images/background.png");
+  background-repeat: no-repeat;
 }
 
 
