@@ -22,8 +22,8 @@ shootAudio.src = "./sounds/sounds_player_shooting.wav";
 let explosionAudio = new Audio();
 explosionAudio.src = "./sounds/sounds_enemy_destroyed.wav";
 
-const gameOver = new Image();
-gameOver.src = "./images/game_over.png";
+const gameOverImage = new Image();
+gameOverImage.src = "./images/game_over.png";
 
 const youWin = new Image();
 youWin.src = "./images/win.png";
@@ -88,7 +88,7 @@ function roundedRect(ctx, x, y, width, height, radius) {
   ctx.lineTo(x, y + height - radius);
   ctx.arcTo(x, y + height, x + radius, y + height, radius);
   ctx.lineTo(x + width - radius, y + height);
-  ctx.arcTo(x + width, y + height, x + width, y + height-radius, radius);
+  ctx.arcTo(x + width, y + height, x + width, y + height - radius, radius);
   ctx.lineTo(x + width, y + radius);
   ctx.arcTo(x + width, y, x + width - radius, y, radius);
   ctx.lineTo(x + radius, y);
@@ -96,13 +96,38 @@ function roundedRect(ctx, x, y, width, height, radius) {
   ctx.stroke();
 }
 
-
 function showScore() {
   ctx.fillStyle = "black";
   ctx.font = "bold 30px Arial";
   ctx.fillText("Scores", 610, 100);
   ctx.fillText(scorePoints, 640, 140);
   roundedRect(ctx, 605, 60, 120, 90, 20);
+}
+
+function gameOver() {
+  explosionAudio.play();
+
+  setTimeout(() => {
+    ctx.drawImage(gameOverImage, 0, 0, canvas.width, canvas.height);
+  }, 2000);
+
+  setTimeout(() => {
+    scenario.draw();
+    document.getElementById("start-game-button").disabled = false;
+    document.getElementById("start-game-button").style.visibility = "visible";
+  }, 5000);
+}
+
+function win() {
+  setTimeout(() => {
+    ctx.drawImage(youWin, 0, 0, canvas.width, canvas.height);
+  }, 2000);
+
+  setTimeout(() => {
+    scenario.draw();
+    document.getElementById("start-game-button").disabled = false;
+    document.getElementById("start-game-button").style.visibility = "visible";
+  }, 5000);
 }
 
 window.onload = function () {
@@ -133,34 +158,12 @@ function startGame() {
     updateShoots();
     showScore();
     if (checkForFatalCollision()) {
-      explosionAudio.play();
-
-      setTimeout(() => {
-        ctx.drawImage(gameOver, 0, 0, canvas.width, canvas.height);
-      }, 2000);
-
-      setTimeout(() => {
-        scenario.draw();
-        document.getElementById("start-game-button").disabled = false;
-        document.getElementById("start-game-button").style.visibility =
-          "visible";
-      }, 5000);
-
+      gameOver();
       clearInterval(startInterval);
     }
 
-    if (scorePoints >= 200) {
-      setTimeout(() => {
-        ctx.drawImage(youWin, 0, 0, canvas.width, canvas.height);
-      }, 2000);
-
-      setTimeout(() => {
-        scenario.draw();
-        document.getElementById("start-game-button").disabled = false;
-        document.getElementById("start-game-button").style.visibility =
-          "visible";
-      }, 5000);
-
+    if (scorePoints >= 100) {
+      win();
       clearInterval(startInterval);
     }
     checkForShootCollision();
