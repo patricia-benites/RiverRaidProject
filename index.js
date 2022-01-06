@@ -2,31 +2,31 @@ const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
 const chopperl = new Image();
-chopperl.src = "../images/chopp.png";
+chopperl.src = "./images/chopp.png";
 
 const chopperr = new Image();
-chopperr.src = "../images/chopper_r.png";
+chopperr.src = "./images/chopper_r.png";
 
 const shipl = new Image();
-shipl.src = "../images/ship.png";
+shipl.src = "./images/ship.png";
 
 const shipr = new Image();
-shipr.src = "../images/ship_r.png";
+shipr.src = "./images/ship_r.png";
 
 let audio = new Audio();
-audio.src = "../sounds/sounds_player_flying_normal.wav";
+audio.src = "./sounds/sounds_player_flying_normal.wav";
 
 let shootAudio = new Audio();
-shootAudio.src = "../sounds/sounds_player_shooting.wav";
+shootAudio.src = "./sounds/sounds_player_shooting.wav";
 
 let explosionAudio = new Audio();
-explosionAudio.src = "../sounds/sounds_enemy_destroyed.wav";
+explosionAudio.src = "./sounds/sounds_enemy_destroyed.wav";
 
 const gameOver = new Image();
-gameOver.src = "../images/game_over.png";
+gameOver.src = "./images/game_over.png";
 
 const youWin = new Image();
-youWin.src = "../images/win.png";
+youWin.src = "./images/win.png";
 
 let plane;
 let scenario;
