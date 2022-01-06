@@ -108,7 +108,7 @@ function startGame() {
   obstacles.push(leftPanel);
   obstacles.push(rightPanel);
   plane = new Plane();
-  scenario = new Scenario1(canvas, plane);
+  scenario = new Scenario1(canvas);
   const startInterval = setInterval(() => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     scenario.draw();
