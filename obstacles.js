@@ -1,5 +1,5 @@
 class Obstacle {
-  constructor(argX, argY, argWidth, argHeight, image = null) {
+  constructor(argX, argY, argWidth, argHeight, image = null, argIsFuel = false) {
     this.x = argX;
     this.y = argY;
     this.width = argWidth;
@@ -8,6 +8,7 @@ class Obstacle {
     this.speedY = 2;
     this.shot = false;
     this.visible = true;
+    this.fuel = argIsFuel
   }
 
   move() {

@@ -13,6 +13,9 @@ shipl.src = "./images/ship.png";
 const shipr = new Image();
 shipr.src = "./images/ship_r.png";
 
+const fuel = new Image();
+fuel.src = "./images/fuel.png";
+
 let audio = new Audio();
 audio.src = "./sounds/sounds_player_flying_normal.wav";
 
@@ -43,13 +46,15 @@ function updateObstacles() {
   });
   frames++;
   if (frames % 150 === 0) {
-    const dimensions = { 0: 50, 1: 50, 2: 70, 3: 70 };
-    const imageTypes = [chopperl, chopperr, shipl, shipr];
+    const dimensions = { 0: [50, 30], 1: [50,30], 2: [70, 30], 3: [70,30], 4: [30,40] };
+    const imageTypes = [chopperl, chopperr, shipl, shipr, fuel];
     const xPos = randomIntFromInterval(210, 540);
-    const random = randomIntFromInterval(0, 3)
+    const random = randomIntFromInterval(0, 4);
     const type = imageTypes[random];
+    let isFuel = false
+    if (random == 4) {isFuel = true};
     console.log(type)
-    obstacles.push(new Obstacle(xPos, 0, dimensions[random], 30, type));
+    obstacles.push(new Obstacle(xPos, 0, dimensions[random][0], dimensions[random][1], type, isFuel));
   }
 }
 
@@ -65,8 +70,10 @@ function updateShoots() {
 
 function checkForFatalCollision() {
   const collision = obstacles.some((obstacle) => {
-    return plane.collision(obstacle);
+    if (obstacle.fuel == false) {
+    return plane.collision(obstacle);}
   });
+
 
   return collision;
 }
@@ -75,7 +82,7 @@ function checkForShootCollision() {
   shoots.forEach((shoot) => {
     obstacles.forEach((obstacle) => {
       const collision = shoot.collision(obstacle);
-      if (collision && obstacle.shot == false) {
+      if (collision && obstacle.shot == false && !obstacle.fuel) {
         explosionAudio.play();
         scorePoints += 10;
         obstacle.shot = true;

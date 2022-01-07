@@ -37,7 +37,7 @@ class Plane {
   }
 
   collision(obstacle) {
-    return !(
+      return !(
       this.bottom() < obstacle.top() ||
       this.top() > obstacle.bottom() ||
       this.right() < obstacle.left() ||
