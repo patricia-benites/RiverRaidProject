@@ -13,4 +13,8 @@ Implement River Raid game as a requirement for Project 1 Ironhack
 
  # How to Loose
 
- If you collide with the adversaries, helicopters or ships, or with the land (green part), you die.
+ If you collide with the adversaries, helicopters or ships, or with the land (green part), you die. Also, if your fuel ends, you die.
+
+# Game
+
+https://patricia-benites.github.io/RiverRaidProject/
