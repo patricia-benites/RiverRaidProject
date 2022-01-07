@@ -43,10 +43,13 @@ function updateObstacles() {
   });
   frames++;
   if (frames % 150 === 0) {
+    const dimensions = { 0: 50, 1: 50, 2: 70, 3: 70 };
     const imageTypes = [chopperl, chopperr, shipl, shipr];
     const xPos = randomIntFromInterval(210, 540);
-    const type = imageTypes[randomIntFromInterval(0, 3)];
-    obstacles.push(new Obstacle(xPos, 0, 50, 30, type));
+    const random = randomIntFromInterval(0, 3)
+    const type = imageTypes[random];
+    console.log(type)
+    obstacles.push(new Obstacle(xPos, 0, dimensions[random], 30, type));
   }
 }
 
