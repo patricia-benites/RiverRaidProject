@@ -16,6 +16,12 @@ shipr.src = "./images/ship_r.png";
 const fuel = new Image();
 fuel.src = "./images/fuel.png";
 
+const gameOverImage = new Image();
+gameOverImage.src = "./images/game_over.png";
+
+const youWin = new Image();
+youWin.src = "./images/win.png";
+
 let audio = new Audio();
 audio.src = "./sounds/sounds_player_flying_normal.wav";
 
@@ -25,11 +31,11 @@ shootAudio.src = "./sounds/sounds_player_shooting.wav";
 let explosionAudio = new Audio();
 explosionAudio.src = "./sounds/sounds_enemy_destroyed.wav";
 
-const gameOverImage = new Image();
-gameOverImage.src = "./images/game_over.png";
+let fuelAlert = new Audio();
+fuelAlert.src = "./sounds/sounds_fuel_alert.wav";
 
-const youWin = new Image();
-youWin.src = "./images/win.png";
+let refueling = new Audio();
+refueling.src = "./sounds/sounds_player_refueling.wav";
 
 let plane;
 let scenario;
@@ -39,22 +45,39 @@ let shoots = [];
 let obstacles = [];
 let frames = 0;
 let scorePoints = 0;
+let fuelLevel = 1500;
 
 function updateObstacles() {
   obstacles.forEach((obstacle) => {
     obstacle.draw();
   });
   frames++;
-  if (frames % 150 === 0) {
-    const dimensions = { 0: [50, 30], 1: [50,30], 2: [70, 30], 3: [70,30], 4: [30,40] };
+  if (frames % 100 === 0) {
+    const dimensions = {
+      0: [50, 30],
+      1: [50, 30],
+      2: [70, 30],
+      3: [70, 30],
+      4: [30, 40],
+    };
     const imageTypes = [chopperl, chopperr, shipl, shipr, fuel];
     const xPos = randomIntFromInterval(210, 540);
     const random = randomIntFromInterval(0, 4);
     const type = imageTypes[random];
-    let isFuel = false
-    if (random == 4) {isFuel = true};
-    console.log(type)
-    obstacles.push(new Obstacle(xPos, 0, dimensions[random][0], dimensions[random][1], type, isFuel));
+    let isFuel = false;
+    if (random == 4) {
+      isFuel = true;
+    }
+    obstacles.push(
+      new Obstacle(
+        xPos,
+        0,
+        dimensions[random][0],
+        dimensions[random][1],
+        type,
+        isFuel
+      )
+    );
   }
 }
 
@@ -71,9 +94,9 @@ function updateShoots() {
 function checkForFatalCollision() {
   const collision = obstacles.some((obstacle) => {
     if (obstacle.fuel == false) {
-    return plane.collision(obstacle);}
+      return plane.collision(obstacle);
+    }
   });
-
 
   return collision;
 }
@@ -90,6 +113,26 @@ function checkForShootCollision() {
       }
     });
   });
+}
+
+function checkForFuel() {
+  const recharge = obstacles.some((obstacle) => {
+    if (obstacle.fuel == true) {
+      return plane.collision(obstacle);
+    }
+  });
+
+  if (recharge) {
+    fuelLevel = 1500;
+    refueling.play();
+  }
+}
+
+function updateFuel() {
+  fuelLevel -= 1;
+  if (fuelLevel <= 500) {
+    fuelAlert.play();
+  }
 }
 
 function roundedRect(ctx, x, y, width, height, radius) {
@@ -167,7 +210,14 @@ function startGame() {
     updateObstacles();
     updateShoots();
     showScore();
+    checkForFuel();
+    updateFuel();
     if (checkForFatalCollision()) {
+      gameOver();
+      clearInterval(startInterval);
+    }
+
+    if (fuelLevel < 0) {
       gameOver();
       clearInterval(startInterval);
     }
