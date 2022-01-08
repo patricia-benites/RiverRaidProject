@@ -198,6 +198,7 @@ function startGame() {
   obstacles = [];
   frames = 0;
   scorePoints = 0;
+  fuelLevel = 1500;
   obstacles.push(leftPanel);
   obstacles.push(rightPanel);
   plane = new Plane();
